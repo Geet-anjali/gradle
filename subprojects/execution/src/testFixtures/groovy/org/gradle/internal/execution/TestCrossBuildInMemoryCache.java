@@ -26,7 +26,7 @@ public class TestCrossBuildInMemoryCache<K, V> implements CrossBuildInMemoryCach
     private final ConcurrentMap<K, V> map = new ConcurrentHashMap<>();
 
     @Override
-    public V get(K key, Transformer<V, K> factory) {
+    public V get(K key, Transformer<? extends V, ? super K> factory) {
         return map.computeIfAbsent(key, factory::transform);
     }
 

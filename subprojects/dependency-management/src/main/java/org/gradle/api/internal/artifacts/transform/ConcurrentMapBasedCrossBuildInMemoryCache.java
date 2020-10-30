@@ -31,7 +31,7 @@ public class ConcurrentMapBasedCrossBuildInMemoryCache<K, V> implements CrossBui
     private final ConcurrentMap<K, Boolean> keysFromCurrentBuild = new ConcurrentHashMap<>();
 
     @Override
-    public V get(K key, Transformer<V, K> factory) {
+    public V get(K key, Transformer<? extends V, ? super K> factory) {
         keysFromCurrentBuild.put(key, Boolean.TRUE);
         return map.computeIfAbsent(key, factory::transform);
     }
