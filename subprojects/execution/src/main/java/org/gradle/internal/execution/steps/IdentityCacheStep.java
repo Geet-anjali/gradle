@@ -49,7 +49,7 @@ public class IdentityCacheStep<C extends IdentityContext, R extends Result> impl
         } else {
             return processor.processDeferredOutput(() -> cache.get(
                 identity,
-                __ -> execute(work, context).getExecutionResult()
+                () -> execute(work, context).getExecutionResult()
                     .map(Result.ExecutionResult::getOutput)
                     .map(Cast::<O>uncheckedNonnullCast)));
         }
